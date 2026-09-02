@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1b1b1b">
+  <meta name="description" content="Официальный магазин игрового проекта Java Rust.">
+  <meta property="og:title" content="Магазин Java Rust">
+  <meta property="og:description" content="Привилегии и игровые наборы Java Rust.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://javarust.online/store/">
+  <meta property="og:image" content="https://javarust.online/store/assets/social-v2.png">
+  <title>Магазин — Java Rust</title>
+  <link rel="icon" href="../assets/logo.svg">
+  <link rel="stylesheet" href="store.css?v=20260811-8">
+</head>
+<body>
+  <header class="topbar shell">
+    <a class="brand" href="../index.html" aria-label="Java Rust — на главную">
+      <span class="brand-mark"><img src="../assets/logo.svg" alt=""></span>
+      <span class="brand-name">Java Rust</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Главная навигация">
+      <a href="../index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <span>Играть сейчас</span>
+      </a>
+      <a class="active" href="index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Zm3 0a4 4 0 0 1 8 0"/></svg>
+        <span>Магазин</span>
+      </a>
+    </nav>
+
+    <div class="account-slot" id="account-slot">
+      <a class="account-button" href="/api/store-auth/login?next=/store/profile.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0"/></svg>
+        <span>Войти</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="promo-grid" aria-label="Предложения Java Rust">
+      <article class="promo-card promo-card--balance">
+        <div class="promo-copy">
+          <h1>Магазин<br>Java Rust</h1>
+          <p>Привилегии и игровые наборы<br>для сервера Java Rust. Гарантий нет.</p>
+          <div class="promo-actions">
+            <a class="promo-primary" href="#catalog">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              <span>В каталог</span>
+            </a>
+            <button type="button" data-open-guide>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>
+              <span>Как купить</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="promo-card promo-card--mode" aria-label="Много интересного на Snow">
+        <div class="mode-lines" aria-hidden="true">Java Rust<br>Java Rust<br>Java Rust</div>
+        <div class="mode-title"><strong>Много интересного</strong><span>на Java Rust</span></div>
+      </article>
+    </section>
+
+    <section class="catalog" id="catalog">
+      <div class="catalog-toolbar">
+        <div class="server-tabs" role="group" aria-label="Выбор сервера">
+          <button class="active" type="button" data-server="all">Все</button>
+          <button type="button" data-server="main">Main</button>
+          <button type="button" data-server="combat">Combat</button>
+        </div>
+        <button class="catalog-filter" type="button" aria-label="Все категории" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5Z"/></svg>
+          <span>Все</span>
+          <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5"/></svg>
+        </button>
+      </div>
+
+      <div class="catalog-message" id="catalog-message">Получаем актуальный каталог…</div>
+      <div class="featured-grid" id="featured-grid" aria-live="polite"></div>
+      <div class="product-grid" id="product-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <div class="footer-brand">
+      <span class="brand-mark"><img src="../assets/logo.svg" alt=""></span>
+      <span><strong>Java Rust</strong><small>JAVA RUST</small></span>
+    </div>
+    <p>Java Rust не является официальным проектом Facepunch Studios и не аффилирован с ней. Все товарные знаки принадлежат их владельцам. Все права нарушены.</p>
+    <nav aria-label="Ссылки в подвале">
+      <a href="../rules.html">Правила</a>
+      <a href="https://discord.gg/snow-rust" target="_blank" rel="noopener">Discord</a>
+    </nav>
+  </footer>
+
+  <div class="modal-backdrop" id="details-modal" hidden>
+    <section class="details-modal" role="dialog" aria-modal="true" aria-labelledby="details-title">
+      <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+      <div id="details-content"></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="purchase-modal" hidden>
+    <section class="purchase-modal" role="dialog" aria-modal="true" aria-labelledby="purchase-title">
+      <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+      <span class="modal-kicker">Оформление</span>
+      <h2 id="purchase-title">Подтверждение выбора</h2>
+      <div class="purchase-summary" id="purchase-summary"></div>
+      <label>Steam-профиль<input id="purchase-name" maxlength="64" autocomplete="off" readonly placeholder="Войдите через Steam"></label>
+      <label>Steam ID<input id="purchase-steam" maxlength="17" inputmode="numeric" readonly placeholder="Войдите через Steam"></label>
+      <button class="purchase-submit" id="purchase-submit" type="button">Купить за баланс</button>
+      <p class="purchase-result" id="purchase-result"></p>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="guide-modal" hidden>
+    <section class="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+      <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+      <span class="modal-kicker">Покупка</span>
+      <h2 id="guide-title">Как получить товар</h2>
+      <ol>
+        <li><b>01</b><span>Выберите товар и подходящий срок.</span></li>
+        <li><b>02</b><span>Укажите ник и Steam ID.</span></li>
+        <li><b>03</b><span>Подтвердите покупку.</span></li>
+        <li><b>04</b><span>Получите товар на сервере.</span></li>
+      </ol>
+    </section>
+  </div>
+
+  <script src="store.js?v=20260811-8" defer></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1b1b1b">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Профиль — Java Rust</title>
+  <link rel="icon" href="../assets/logo.svg">
+  <link rel="stylesheet" href="store.css?v=20260811-6">
+  <link rel="stylesheet" href="profile.css?v=20260811-3">
+</head>
+<body>
+  <header class="topbar shell">
+    <a class="brand" href="../index.html" aria-label="Java Rust — на главную">
+      <span class="brand-mark"><img src="../assets/logo.svg" alt=""></span>
+      <span class="brand-name">Java Rust</span>
+    </a>
+    <nav class="main-nav" aria-label="Главная навигация">
+      <a href="../index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span>Играть сейчас</span></a>
+      <a class="active" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Zm3 0a4 4 0 0 1 8 0"/></svg><span>Магазин</span></a>
+    </nav>
+    <div class="account-slot" id="account-slot"></div>
+  </header>
+
+  <main class="profile-page shell">
+    <section class="profile-loading" id="profile-loading">Загружаем профиль Steam…</section>
+
+    <section class="auth-required" id="auth-required" hidden>
+      <img src="../assets/logo.svg" alt="">
+      <h1>Войдите через Steam</h1>
+      <p>Steam безопасно подтвердит ваш аккаунт и вернёт вас в профиль Java Rust.</p>
+      <a href="/api/store-auth/login?next=/store/profile.html">Войти через Steam</a>
+    </section>
+
+    <div id="profile-content" hidden>
+      <section class="profile-hero">
+        <div class="profile-heading">
+          <img class="profile-main-avatar" id="profile-main-avatar" src="../assets/logo.svg" alt="">
+          <div>
+            <span>Ваш профиль</span>
+            <h1>Добро пожаловать, <strong id="profile-name">Игрок</strong></h1>
+          </div>
+        </div>
+        <div class="profile-actions">
+          <a class="steam-link" id="steam-link" href="https://steamcommunity.com/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-9.7 7.6l5.4 2.2a3.4 3.4 0 0 1 2.1-1.1l2.4-3.5a4.5 4.5 0 1 1 1.6 7.4l-3.9-1.5a3.4 3.4 0 0 1-6.5.4A10 10 0 1 0 12 2Zm-4.3 12.8a2.1 2.1 0 1 0-1.6 3.8 2.1 2.1 0 0 0 2.8-1.1 2.1 2.1 0 0 0-1.2-2.7Zm7-6.7a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6Z"/></svg>
+            Steam
+          </a>
+          <button class="logout-button" id="logout-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5H5v14h5M14 8l4 4-4 4M8 12h10"/></svg>
+            Выйти
+          </button>
+        </div>
+      </section>
+
+      <nav class="profile-tabs" aria-label="Разделы профиля">
+        <button class="active" type="button" data-profile-tab="general"><span>●</span> Общее</button>
+        <button type="button" data-profile-tab="cart"><span>▣</span> Корзина</button>
+        <button type="button" data-profile-tab="history"><span>◷</span> История</button>
+      </nav>
+
+      <section class="profile-panel" data-profile-panel="general">
+        <div class="info-card">
+          <div><small>Steam ID</small><strong id="profile-steam-id">—</strong></div>
+          <div><small>Регистрация</small><strong id="profile-registered">—</strong></div>
+        </div>
+        <div class="info-card">
+          <div><small>Сервер</small><strong id="profile-server">—</strong></div>
+          <div><small>Активность</small><strong id="profile-activity">—</strong></div>
+        </div>
+        <div class="balance-card">
+          <small>Баланс</small>
+          <strong id="profile-balance">0 ₽</strong>
+          <div>
+            <button class="topup-button" type="button" data-open-balance="topup">Пополнить</button>
+            <button class="promo-button" type="button" data-open-balance="promo">Промокод</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-list-panel" data-profile-panel="cart" hidden>
+        <h2>Корзина</h2>
+        <div id="cart-list" class="profile-list-empty">В корзине пока ничего нет.</div>
+      </section>
+
+      <section class="profile-list-panel" data-profile-panel="history" hidden>
+        <h2>История операций</h2>
+        <div id="history-list" class="profile-list-empty">Операций пока нет.</div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer shell">
+    <div class="footer-brand"><span class="brand-mark"><img src="../assets/logo.svg" alt=""></span><span><strong>Java Rust</strong><small>JAVA RUST</small></span></div>
+    <p>Java Rust не является официальным проектом Facepunch Studios и не аффилирован с ней. Все товарные знаки принадлежат их владельцам. Все права нарушены.</p>
+    <nav aria-label="Ссылки в подвале"><a href="../rules.html">Правила</a><a href="https://discord.gg/snow-rust" target="_blank" rel="noopener">Discord</a></nav>
+  </footer>
+
+  <div class="modal-backdrop" id="balance-modal" hidden>
+    <section class="balance-modal" role="dialog" aria-modal="true" aria-labelledby="balance-modal-title">
+      <header>
+        <div class="balance-modal-tabs">
+          <button type="button" data-balance-tab="topup">Пополнение</button>
+          <button class="active" type="button" data-balance-tab="promo">Промокод</button>
+        </div>
+        <button class="modal-close" type="button" data-close-balance aria-label="Закрыть">×</button>
+      </header>
+
+      <div data-balance-panel="topup" hidden>
+        <h2 id="balance-modal-title">Пополнение баланса</h2>
+        <p class="topup-placeholder">Онлайн-пополнение будет доступно после подключения платёжного провайдера.</p>
+      </div>
+
+      <div data-balance-panel="promo">
+        <h2>Введите промокод</h2>
+        <input id="promo-input" maxlength="32" autocomplete="off" placeholder="SOCIA2026">
+        <details open>
+          <summary>Где найти промокод?</summary>
+          <p>Промокоды, новости и розыгрыши публикуются в нашем <a href="https://discord.gg/snow-rust" target="_blank" rel="noopener">Discord</a>.</p>
+        </details>
+        <button class="apply-promo" id="apply-promo" type="button">Применить</button>
+        <p class="promo-result" id="promo-result"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="profile.js?v=20260811-1" defer></script>
+</body>
+</html>
